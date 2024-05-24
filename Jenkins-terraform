@@ -1,23 +1,18 @@
 pipeline {
-    options {
-        skipDefaultCheckout() // Skip the default checkout
-    }
-    parameters {
+
+     parameters {
         string(name: 'environment', defaultValue: 'Prod', description: 'Workspace/Environment file to use for deployment')
         string(name: 'region', defaultValue: 'us-east-1', description: 'Workspace/region file to use for deployment')
+        
+
     }     
     agent any
     stages {
         stage('Download terraform code from Gihub') { 
             steps {
-                script {
-                    git branch: 'master', credentialsId: 'kiran45git', url: 'https://github.com/kiran45git/myweb-master.git'
-                }
+                git credentialsId: 'kiran45git', url: 'https://github.com/kiran45git/myweb-master.git'
             }    
         }
-        // Other stages...
-    }    
-}
 
         stage('DummyStage') { 
             steps {
